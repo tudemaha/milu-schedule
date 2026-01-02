@@ -36,20 +36,20 @@ class MasterSeeder extends Seeder
             ],
             [
                 'id' => 2,
-                'name' => 'Request',
+                'name' => 'Morning (M)',
             ],
             [
                 'id' => 3,
-                'name' => 'Personal Leave',
+                'name' => 'Evening (E)',
             ],
             [
                 'id' => 4,
-                'name' => 'Sick Leave',
+                'name' => 'Personal Leave',
             ],
             [
                 'id' => 5,
-                'name' => 'Cuti Lahiran',
-            ],
+                'name' => 'Sick Leave',
+            ]
         ]);
     }
 }

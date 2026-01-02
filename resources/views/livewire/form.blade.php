@@ -10,8 +10,8 @@
                 Team
                 <span class="text-red-400">*</span>
             </label>
-            <select name="team" id="team" wire:model.live="teamID"
-                class="outline-2 outline-gray-400 rounded-lg py-1.5 active:border-rose-300 px-2 {{ $teamID != 0 ? 'text-black' : 'text-gray-400' }}" required>
+            <select name="team" id="team" required wire:model.live="teamID"
+                class="outline-2 outline-gray-400 rounded-lg py-1.5 active:border-rose-300 px-2 {{ $teamID != 0 ? 'text-black' : 'text-gray-400' }}">
                 <option value="0" default selected hidden>Select team</option>
                 @foreach($teams as $team)
                     <option value="{{ $team->id }}">{{ $team->name }}</option>
@@ -25,11 +25,11 @@
                     Name
                     <span class="text-red-400">*</span>
                 </label>
-                <select name="name" id="name" wire:model.blur="staffID"
-                    class="outline-2 outline-gray-400 rounded-lg py-1.5 active:border-rose-300 px-2 {{ $staffID != '' ? 'text-black' : 'text-gray-400' }}" required>
+                <select name="name" id="name" required wire:model.blur="employeeID"
+                    class="outline-2 outline-gray-400 rounded-lg py-1.5 active:border-rose-300 px-2 {{ $employeeID != '' ? 'text-black' : 'text-gray-400' }}">
                     <option value="0" default selected hidden>Select name</option>
-                    @foreach ($staffs as $staff)
-                        <option value={{ $staff->id }}>{{ $staff->name }}</option>
+                    @foreach ($employees as $employee)
+                        <option value={{ $employee->id }}>{{ $employee->name }}</option>
                     @endforeach
                 </select>
             </div>
@@ -42,20 +42,20 @@
                         Request Date
                         <span class="text-red-400">*</span>
                     </label>
-                    <input type="date" min={{ $nextWeekStartDate }} max={{ $nextWeekEndDate }} wire:model.blur="requests.{{ $index }}.date"
+                    <input type="date" min={{ $nextWeekStartDate }} max={{ $nextWeekEndDate }} required wire:model.blur="requests.{{ $index }}.date"
                         class="outline-2 outline-gray-400 rounded-lg py-1 active:border-rose-300 px-2 {{ $request['date'] != '' ? 'text-black' : 'text-gray-400' }}">
                 </div>
     
                 <div class="flex flex-col gap-1 flex-1">
                     <label for="date" class="font-medium">
-                        Reason
+                        Request Type
                         <span class="text-red-400">*</span>
                     </label>
-                    <select name="reason" id="reason" wire:model.blur="requests.{{ $index }}.reason_id" 
-                        class="outline-2 outline-gray-400 rounded-lg py-1.5 active:border-rose-300 px-2 {{ $request['reason_id'] != 0 ? 'text-black' : 'text-gray-400' }}">
-                        <option value="0" default selected hidden>Select reason</option>
-                        @foreach ($reasons as $reason)
-                            <option value={{ $reason->id }}>{{ $reason->name }}</option>
+                    <select name="type" id="type" required wire:model.blur="requests.{{ $index }}.type_id" 
+                        class="outline-2 outline-gray-400 rounded-lg py-1.5 active:border-rose-300 px-2 {{ $request['type_id'] != 0 ? 'text-black' : 'text-gray-400' }}">
+                        <option value="0" default selected hidden>Select request type</option>
+                        @foreach ($types as $type)
+                            <option value={{ $type->id }}>{{ $type->name }}</option>
                         @endforeach
                     </select>
                 </div>

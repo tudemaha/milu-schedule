@@ -12,15 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('master_teams', function (Blueprint $table) {
-            $table->tinyInteger('id');
+            $table->tinyInteger('id')->primary();
             $table->string('name');
-            $table->primary('id');
         });
 
         Schema::create('master_request_types', function (Blueprint $table) {
-            $table->tinyInteger('id');
+            $table->tinyInteger('id')->primary();
             $table->string('name');
-            $table->primary('id');
         });
     }
 

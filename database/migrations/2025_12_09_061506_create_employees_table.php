@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('staff', function (Blueprint $table) {
-            $table->uuid('id');
+        Schema::create('employees', function (Blueprint $table) {
+            $table->uuid('id')->primary();
             $table->string('name');
             $table->tinyInteger('team_id');
             $table->foreign('team_id')->references('id')->on('master_teams');
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('staff');
+        Schema::dropIfExists('employees');
     }
 };

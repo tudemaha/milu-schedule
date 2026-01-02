@@ -9,9 +9,11 @@ class Request extends Model
 {
     use HasUuids;
 
+    public $incrementing = false;
+    protected $keyType = 'string';
     protected $fillable = [
-        'staff_id',
-        'request_id',
-        'date'
+        'employee_id',
+        'type_id',
+        'date',
     ];
 }
