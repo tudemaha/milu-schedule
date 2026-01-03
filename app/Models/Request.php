@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Request extends Model
 {
@@ -16,4 +17,8 @@ class Request extends Model
         'type_id',
         'date',
     ];
+
+    public function employee(): BelongsTo {
+        return $this->belongsTo(Employee::class);
+    }
 }
