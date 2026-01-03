@@ -1,4 +1,4 @@
-<div class="flex flex-col">
+<div class="flex flex-col md:p-15 p-5">
     <div class="flex flex-col text-center gap-0.5">
         <h2 class="text-3xl font-bold">Milu</h2>
         <h3 class="text-2xl font-medium">Schedule Request</h3>
@@ -117,6 +117,11 @@
             <button wire:click.prevent="add" class="text-center cursor-pointer bg-blue-400 text-white font-medium py-1.5 rounded-lg px-4">+ Add</button>
         </div>
 
-        <button  class="text-center cursor-pointer bg-green-600 text-white font-medium py-1.5 rounded-lg px-4">Submit</button>
+        <button  class="text-center cursor-pointer bg-green-600 text-white font-medium py-1.5 rounded-lg px-4">
+            Submit
+            <div wire:loading>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3c4.97 0 9 4.03 9 9"><animateTransform attributeName="transform" dur="1.5s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path></svg>
+            </div>
+        </button>
     </form>
 </div>
