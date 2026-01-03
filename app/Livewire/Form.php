@@ -126,8 +126,9 @@ class Form extends Component
 
         Request::insert($insertToDB);
 
-        session()->flash('success', 'Requests submitted!');
         $this->reset();
+
+        return $this->redirect('/success');
     }
 
     public function render()
