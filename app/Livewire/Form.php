@@ -32,7 +32,7 @@ class Form extends Component
             'teamID' => 'required|integer|min:1|max:3',
             'employeeID' => 'required|uuid',
             'requests' => 'required|array|min:1',
-            'requests.*.date' => 'required|date',
+            'requests.*.date' => "required|date|min:$this->nextWeekStartDate|max:$this->nextWeekEndDate",
             'requests.*.type_id' => 'required|integer|min:1|max:5'
         ];
     }
@@ -50,9 +50,12 @@ class Form extends Component
     }
 
     public function updateOffRequests($teamID) {
+        $end = Carbon::parse($this->nextWeekEndDate)->endOfDay();
+
         $this->offRequests = DB::table('requests')
             ->join('employees', 'employees.id', '=', 'requests.employee_id')
             ->select('date', DB::raw('COUNT(date) AS total'))
+            ->whereBetween('date', [$this->nextWeekStartDate, $end])
             ->where([
                 'type_id' => 1,
                 'employees.team_id' => $teamID
