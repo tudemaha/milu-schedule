@@ -52,7 +52,7 @@
                         </button>
                     </div>
                 </div>
-                <table class="border-2 border-gray-400 rounded-lg border-tools-table-outline">
+                <table class="border-2 border-gray-400">
                     <tr>
                         <td class="text-sm text-center border-2 border-gray-400">Date</td>
                         @foreach ($offRequests as $off)

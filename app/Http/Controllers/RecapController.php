@@ -20,8 +20,10 @@ class RecapController extends Controller
             ->sortBy('employee.team_id')
             ->groupBy(['employee.team_id', 'employee_id']);
 
-            dump($recap);
-
-        return view('recap', ['recap' => $recap]);
+        return view('recap', [
+            'recap' => $recap,
+            'startDate' => $nextWeekStartDate,
+            'endDate' => $nextWeekEndDate,
+        ]);
     }
 }

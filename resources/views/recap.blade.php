@@ -1,5 +1,8 @@
 <x-layouts.app>
-    <div class="px-2">
+    <div class="p-3">
+        <h2 class="text-center font-bold text-2xl">Recap</h2>
+        <h3 class="text-center font-medium text-xl">{{$startDate}} until {{$endDate->format('Y-m-d')}}</h3>
+
         @foreach ($recap as $team_id => $employees)
             @switch($team_id)
                 @case(1)
