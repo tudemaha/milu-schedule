@@ -22,22 +22,25 @@
             @enderror
         </div>
 
-        <div class="flex flex-col gap-1">
-            <label for="name" class="font-medium">
-                Name
-                <span class="text-red-400">*</span>
-            </label>
-            <select name="name" id="name" required wire:model.blur="employeeID"
-                class="outline-2 outline-gray-400 rounded-lg py-1.5 active:border-rose-300 px-2 {{ $employeeID != '' ? 'text-black' : 'text-gray-400' }}">
-                <option value="0" default selected hidden>Select name</option>
-                @foreach ($employees as $employee)
-                    <option value={{ $employee->id }}>{{ $employee->name }}</option>
-                @endforeach
-            </select>
-            @error("employeeID")
-                <div class="text-red-400 text-sm">{{ $message }}</div>
-            @enderror
-        </div>
+        @if ($teamID != 0)
+            <div class="flex flex-col gap-1">
+                <label for="name" class="font-medium">
+                    Name
+                    <span class="text-red-400">*</span>
+                </label>
+                <select name="name" id="name" required wire:model.blur="employeeID"
+                    class="outline-2 outline-gray-400 rounded-lg py-1.5 active:border-rose-300 px-2 {{ $employeeID != '' ? 'text-black' : 'text-gray-400' }}">
+                    <option value="0" default selected hidden>Select name</option>
+                    @foreach ($employees as $employee)
+                        <option value={{ $employee->id }}>{{ $employee->name }}</option>
+                    @endforeach
+                </select>
+                @error("employeeID")
+                    <div class="text-red-400 text-sm">{{ $message }}</div>
+                @enderror
+            </div>
+        @endif
+        
        
         @if (count($offRequests) > 0)
             <div class="flex flex-col gap-1">
@@ -117,7 +120,7 @@
             <button wire:click.prevent="add" class="text-center cursor-pointer bg-blue-400 text-white font-medium py-1.5 rounded-lg px-4">+ Add</button>
         </div>
 
-        <button  class="text-center cursor-pointer bg-green-600 text-white font-medium py-1.5 rounded-lg px-4">
+        <button  class="cursor-pointer bg-green-600 text-white font-medium py-1.5 rounded-lg px-4 flex gap-3 justify-center">
             Submit
             <div wire:loading wire:target="save">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3c4.97 0 9 4.03 9 9"><animateTransform attributeName="transform" dur="1.5s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path></svg>

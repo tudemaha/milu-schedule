@@ -32,7 +32,7 @@ class Form extends Component
             'teamID' => 'required|integer|min:1|max:3',
             'employeeID' => 'required|uuid',
             'requests' => 'required|array|min:1',
-            'requests.*.date' => "required|date|min:$this->nextWeekStartDate|max:$this->nextWeekEndDate",
+            'requests.*.date' => "required|date",
             'requests.*.type_id' => 'required|integer|min:1|max:5'
         ];
     }
