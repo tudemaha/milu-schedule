@@ -10,9 +10,9 @@ class RecapController extends Controller
 {
     public function index()
     {
-        $nextSunday = Carbon::now()->next(Carbon::SUNDAY);
-        $nextWeekStartDate = $nextSunday->format('Y-m-d');
-        $nextWeekEndDate = $nextSunday->addDays(6)->endOfDay();
+        $nextMonday = Carbon::now()->next(Carbon::MONDAY);
+        $nextWeekStartDate = $nextMonday->format('Y-m-d');
+        $nextWeekEndDate = $nextMonday->addDays(6)->endOfDay();
 
         $recap = Request::whereBetween('date', [$nextWeekStartDate, $nextWeekEndDate])
             ->with('employee')

@@ -85,17 +85,19 @@ class Form extends Component
         $this->teams = MasterTeam::all();
         $this->types = DB::table("master_request_types")->get();
         
-        $nextSunday = Carbon::now()->next(Carbon::SUNDAY);
-        $this->nextWeekStartDate = $nextSunday->format('Y-m-d');
-        $this->nextWeekEndDate = $nextSunday->addDays(6)->format('Y-m-d');
+        $nextMonday = Carbon::now()->next(Carbon::MONDAY);
+        $this->nextWeekStartDate = $nextMonday->format('Y-m-d');
+        $this->nextWeekEndDate = $nextMonday->addDays(6)->format('Y-m-d');
     }
 
     public function save() {
         $validated = $this->validate();
 
+        $end = Carbon::parse($this->nextWeekEndDate)->endOfDay();
         $offRequests = DB::table('requests')
             ->join('employees', 'employees.id', '=', 'requests.employee_id')
             ->select('date', DB::raw('COUNT(date) AS total'))
+            ->whereBetween('date', [$this->nextWeekStartDate, $end])
             ->where([
                 'type_id' => 1,
                 'employees.team_id' => $this->teamID,
