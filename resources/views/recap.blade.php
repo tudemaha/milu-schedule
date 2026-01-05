@@ -3,6 +3,15 @@
         <h2 class="text-center font-bold text-2xl">Recap</h2>
         <h3 class="text-center font-medium text-xl">{{$startDate}} until {{$endDate->format('Y-m-d')}}</h3>
 
+        <a href="/" class="text-blue-400 underline flex hover:text-blue-500">
+            <span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12l7 -7M8 12l7 7"/>
+                </svg>
+            </span>
+            Home
+        </a>
+
         @foreach ($recap as $team_id => $employees)
             @switch($team_id)
                 @case(1)
@@ -18,7 +27,7 @@
 
             <table class="border-2">
                 @foreach ($employees as $requests)
-                    <tr>
+                    <tr class="border-2">
                         <th class="border-2 px-2">{{ $requests[0]->employee->name }}</th>
                         <td class="flex flex-wrap gap-3 p-2">
                             @foreach ($requests as $request)

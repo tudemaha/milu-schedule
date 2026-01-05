@@ -2,6 +2,18 @@
     <div class="flex flex-col text-center gap-0.5">
         <h2 class="text-3xl font-bold">Milu</h2>
         <h3 class="text-2xl font-medium">Schedule Request</h3>
+        <a href="/recap" class="text-blue-400 underline flex justify-center hover:text-blue-500" target="_blank">
+            Request Recap
+            <span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                        <path d="M11 5h-6v14h14v-6"/>
+                        <path d="M13 11l7 -7"/>
+                        <path d="M21 3h-6M21 3v6"/>
+                    </g>
+                </svg>
+            </span>
+        </a>
     </div>
 
     <form action="" class="flex flex-col gap-6" wire:submit="save">
