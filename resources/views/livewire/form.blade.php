@@ -90,45 +90,47 @@
 
         @foreach ($requests as $index => $request)
             <div class="flex gap-2 md:gap-4">
-                <div class="flex flex-col gap-1 flex-1">
-                    <label for="date" class="font-medium">
-                        Request Date
-                        <span class="text-red-400">*</span>
-                    </label>
-                    <input type="date" min={{ $nextWeekStartDate }} max={{ $nextWeekEndDate }} required wire:model.blur="requests.{{ $index }}.date"
-                        class="outline-2 outline-gray-400 rounded-lg py-1 active:border-rose-300 px-2 {{ $request['date'] != '' ? 'text-black' : 'text-gray-400' }}">
-                    @error("requests.$index.date")
-                        <div class="text-red-400 text-sm">{{ $message }}</div>
-                    @enderror
-                    @error("requests.$index.date_error")
-                        <div class="text-red-400 text-sm">{{ $message }}</div>
-                    @enderror
-                </div>
-    
-                <div class="flex flex-col gap-1 flex-1">
-                    <label for="date" class="font-medium">
-                        Request Type
-                        <span class="text-red-400">*</span>
-                    </label>
-                    <select name="type" id="type" required wire:model.blur="requests.{{ $index }}.type_id" 
-                        class="outline-2 outline-gray-400 rounded-lg py-1.5 active:border-rose-300 px-2 {{ $request['type_id'] != 0 ? 'text-black' : 'text-gray-400' }}">
-                        <option value="0" default selected hidden>Select type</option>
-                        @foreach ($types as $type)
-                            <option value={{ $type->id }}>{{ $type->name }}</option>
-                        @endforeach
-                    </select>
-                    @error("requests.$index.type_id")
-                        <div class="text-red-400 text-sm">{{ $message }}</div>
-                    @enderror
-                </div>
+                <div class="flex gap-2 md:gap-4 flex-wrap w-full"> 
+                    <div class="flex flex-col gap-1 flex-1">
+                        <label for="date" class="font-medium">
+                            Request Date
+                            <span class="text-red-400">*</span>
+                        </label>
+                        <input type="date" min={{ $nextWeekStartDate }} max={{ $nextWeekEndDate }} required wire:model.blur="requests.{{ $index }}.date"
+                            class="outline-2 outline-gray-400 rounded-lg py-1 active:border-rose-300 px-2 {{ $request['date'] != '' ? 'text-black' : 'text-gray-400' }}">
+                        @error("requests.$index.date")
+                            <div class="text-red-400 text-sm">{{ $message }}</div>
+                        @enderror
+                        @error("requests.$index.date_error")
+                            <div class="text-red-400 text-sm">{{ $message }}</div>
+                        @enderror
+                    </div>
+        
+                    <div class="flex flex-col gap-1 flex-1">
+                        <label for="date" class="font-medium">
+                            Request Type
+                            <span class="text-red-400">*</span>
+                        </label>
+                        <select name="type" id="type" required wire:model.blur="requests.{{ $index }}.type_id" 
+                            class="outline-2 outline-gray-400 rounded-lg py-1.5 active:border-rose-300 px-2 {{ $request['type_id'] != 0 ? 'text-black' : 'text-gray-400' }}">
+                            <option value="0" default selected hidden>Select type</option>
+                            @foreach ($types as $type)
+                                <option value={{ $type->id }}>{{ $type->name }}</option>
+                            @endforeach
+                        </select>
+                        @error("requests.$index.type_id")
+                            <div class="text-red-400 text-sm">{{ $message }}</div>
+                        @enderror
+                    </div>
 
-                <div class="flex flex-col gap-1 flex-1">
-                    <label for="reason" class="font-medium">
-                        Reason</label>
-                    <input type="text" id="reason" name="reason" placeholder="Type reason" wire:model.blur="requests.{{ $index }}.reason"
-                        class="outline-2 outline-gray-400 rounded-lg py-1.5 active:border-rose-300 px-2 {{ $request['reason'] != '' ? 'text-black' : 'text-gray-400' }}">
+                    <div class="flex flex-col gap-1 flex-1">
+                        <label for="reason" class="font-medium">
+                            Reason</label>
+                        <input type="text" id="reason" name="reason" placeholder="Type reason" wire:model.blur="requests.{{ $index }}.reason"
+                            class="outline-2 outline-gray-400 rounded-lg py-1 active:border-rose-300 px-2 {{ $request['reason'] != '' ? 'text-black' : 'text-gray-400' }}">
+                    </div>
                 </div>
-
+                
                 @if (count($requests) > 1)
                     <button wire:click.prevent="remove({{ $index }})" class="cursor-pointer px-3 bg-red-400 rounded-lg text-3xl text-white">-</button>
                 @endif
