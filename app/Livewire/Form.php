@@ -24,7 +24,7 @@ class Form extends Component
     public $teamID = 0;
     public $employeeID = '';
     public $requests = [
-        ['date' => '', 'type_id' => 0],
+        ['date' => '', 'type_id' => 0, 'reason' => ''],
     ];
 
     protected function rules() {
@@ -33,7 +33,8 @@ class Form extends Component
             'employeeID' => 'required|uuid',
             'requests' => 'required|array|min:1',
             'requests.*.date' => "required|date",
-            'requests.*.type_id' => 'required|integer|min:1|max:5'
+            'requests.*.type_id' => 'required|integer|min:1|max:5',
+            'requests.*.reason' => 'string',
         ];
     }
 
@@ -70,7 +71,7 @@ class Form extends Component
     }
 
     public function add() {
-        $this->requests[] = ['date' => '', 'type_id' => 0];
+        $this->requests[] = ['date' => '', 'type_id' => 0, 'reason' => ''];
     }
 
     public function remove($index) {
@@ -124,6 +125,7 @@ class Form extends Component
                 'employee_id' => $validated['employeeID'],
                 'type_id' => $request['type_id'],
                 'date' => $request['date'],
+                'reason' => $request['reason'],
                 'created_at' => now(),
                 'updated_at' => now()
             ];

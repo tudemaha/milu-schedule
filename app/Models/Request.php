@@ -16,6 +16,7 @@ class Request extends Model
         'employee_id',
         'type_id',
         'date',
+        'reason',
     ];
 
     public function employee(): BelongsTo {
