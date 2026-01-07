@@ -16,6 +16,7 @@ return new class extends Migration
             $table->uuid('employee_id');
             $table->tinyInteger('type_id');
             $table->date('date');
+            $table->string('reason', 50);
             $table->timestamps();
             $table->foreign('employee_id')->references('id')->on('employees');
             $table->foreign('type_id')->references('id')->on('master_request_types');

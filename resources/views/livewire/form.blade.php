@@ -89,7 +89,7 @@
         @endif
 
         @foreach ($requests as $index => $request)
-            <div class="flex gap-2 md:gap-4 items-stretch">
+            <div class="flex gap-2 md:gap-4">
                 <div class="flex flex-col gap-1 flex-1">
                     <label for="date" class="font-medium">
                         Request Date
@@ -120,6 +120,13 @@
                     @error("requests.$index.type_id")
                         <div class="text-red-400 text-sm">{{ $message }}</div>
                     @enderror
+                </div>
+
+                <div class="flex flex-col gap-1 flex-1">
+                    <label for="reason" class="font-medium">
+                        Reason</label>
+                    <input type="text" id="reason" name="reason" placeholder="Type reason" wire:model.blur="requests.{{ $index }}.reason"
+                        class="outline-2 outline-gray-400 rounded-lg py-1.5 active:border-rose-300 px-2 {{ $request['reason'] != '' ? 'text-black' : 'text-gray-400' }}">
                 </div>
 
                 @if (count($requests) > 1)

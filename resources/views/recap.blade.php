@@ -31,7 +31,7 @@
                         <th class="border-2 px-2">{{ $requests[0]->employee->name }}</th>
                         <td class="flex flex-wrap gap-3 p-2">
                             @foreach ($requests as $request)
-                                <x-request-badge date="{{ $request->date }}" type-id="{{ $request->type_id }}" />
+                                <x-request-badge date="{{ $request->date }}" type-id="{{ $request->type_id }}" reason="{{ $request->reason }}" />
                             @endforeach
                         </td>
                     </tr>

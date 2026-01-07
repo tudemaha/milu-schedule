@@ -5,6 +5,10 @@
             <div>{{ $date }}</div>
             <span>|</span>
             <div class="font-semibold">OFF</div>
+            @if ($reason != '')                
+                <span>|</span>
+                <div>{{ $reason }}</div>
+            @endif
         </div>
     @break
     @case(2)
@@ -12,6 +16,10 @@
             <div>{{ $date }}</div>
             <span>|</span>
             <div class="font-semibold">Morning (M)</div>
+            @if ($reason != '')                
+                <span>|</span>
+                <div>{{ $reason }}</div>
+            @endif
         </div>
     @break
     @case(3)
@@ -19,6 +27,10 @@
             <div>{{ $date }}</div>
             <span>|</span>
             <div class="font-semibold">Evening (E)</div>
+            @if ($reason != '')                
+                <span>|</span>
+                <div>{{ $reason }}</div>
+            @endif
         </div>
     @break
     @case(4)
@@ -26,6 +38,10 @@
             <div>{{ $date }}</div>
             <span>|</span>
             <div class="font-semibold">AL</div>
+            @if ($reason != '')                
+                <span>|</span>
+                <div>{{ $reason }}</div>
+            @endif
         </div>
     @break
     @case(5)
@@ -33,6 +49,10 @@
             <div>{{ $date }}</div>
             <span>|</span>
             <div class="font-semibold">SL</div>
+            @if ($reason != '')                
+                <span>|</span>
+                <div>{{ $reason }}</div>
+            @endif
         </div>
     @break
     @default

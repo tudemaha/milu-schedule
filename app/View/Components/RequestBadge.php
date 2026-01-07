@@ -14,6 +14,7 @@ class RequestBadge extends Component
     public function __construct(
         public string $date,
         public int $typeId,
+        public string $reason,
     ) {
         $this->date = substr($date, 8, 2).'-'.substr($date, 5, 2);
     }
