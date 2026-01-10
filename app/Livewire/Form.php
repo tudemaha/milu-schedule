@@ -57,10 +57,8 @@ class Form extends Component
             ->join('employees', 'employees.id', '=', 'requests.employee_id')
             ->select('date', DB::raw('COUNT(date) AS total'))
             ->whereBetween('date', [$this->nextWeekStartDate, $end])
-            ->where([
-                'type_id' => 1,
-                'employees.team_id' => $teamID
-            ])
+            ->where('employees.team_id', $teamID)
+            ->whereIn('type_id', [1, 4])
             ->groupBy('date')
             ->get();
     }
@@ -99,24 +97,24 @@ class Form extends Component
             ->join('employees', 'employees.id', '=', 'requests.employee_id')
             ->select('date', DB::raw('COUNT(date) AS total'))
             ->whereBetween('date', [$this->nextWeekStartDate, $end])
-            ->where([
-                'type_id' => 1,
-                'employees.team_id' => $this->teamID,
-            ])
+            ->where('employees.team_id', $this->teamID)
+            ->whereIn('type_id', [1, 4])
             ->groupBy('date')
             ->get();
 
         $insertToDB = [];
-        foreach($validated['requests'] as $index => $request) {
+        foreach($validated['requests'] as $reqIdx => $request) {
             // validate off count before insert into database
-            foreach($offRequests as $off) {
-                if($request['date'] == $off->date) {
-                    if(($this->teamID == 1 && $off->total >= 3) || 
-                        ($this->teamID > 1 && $off->total >= 2)) {
-                            $this->addError("requests.".$index.".date_error", 'Off slot already full.');
-                            $this->updateOffRequests($this->teamID);
-                            return;
-                        }
+            if($request['type_id'] == 1 || $request['type_id'] == 4) {
+                foreach($offRequests as $off) {
+                    if($request['date'] == $off->date) {
+                        if(($this->teamID == 1 && $off->total >= 3) || 
+                            ($this->teamID > 1 && $off->total >= 2)) {
+                                $this->addError("requests.".$reqIdx.".date_error", 'Off slot already full.');
+                                $this->updateOffRequests($this->teamID);
+                                return;
+                            }
+                    }
                 }
             }
 
