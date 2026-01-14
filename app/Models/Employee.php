@@ -14,7 +14,8 @@ class Employee extends Model
     protected $keyType = 'string';
     protected $fillable = [
         'team_id',
-        'name'
+        'name',
+        'password'
     ];
 
     public function team(): BelongsTo {
