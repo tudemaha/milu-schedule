@@ -34,7 +34,8 @@
                 <span class="text-red-400">*</span>
             </label>
             <input type="password" id="password" name="password" wire:model.blur="password" required
-                class="outline-2 outline-gray-400 rounded-lg py-1 active:border-rose-300 px-2 text-black">
+                placeholder="Type your password"
+                class="outline-2 outline-gray-400 rounded-lg py-1 active:border-rose-300 px-2 {{ $password != '' ? 'text-black' : 'text-gray-400' }}">
             @error('password')
                 <div class="text-red-400 text-sm">{{ $message }}</div>
             @enderror
@@ -46,7 +47,8 @@
                 <span class="text-red-400">*</span>
             </label>
             <input type="password" id="repeat-password" name="repeat-password" wire:model.blur="passwordRepeat" required
-                class="outline-2 outline-gray-400 rounded-lg py-1 active:border-rose-300 px-2 text-black">
+                placeholder="Retype your password"
+                class="outline-2 outline-gray-400 rounded-lg py-1 active:border-rose-300 px-2 {{ $passwordRepeat != '' ? 'text-black' : 'text-gray-400' }}">
             @error('passwordRepeat')
                 <div class="text-red-400 text-sm">{{ $message }}</div>
             @enderror

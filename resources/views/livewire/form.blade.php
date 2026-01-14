@@ -40,7 +40,7 @@
                     Name
                     <span class="text-red-400">*</span>
                 </label>
-                <select name="name" id="name" required wire:model.blur="employeeID"
+                <select name="name" id="name" required wire:model.live="employeeID"
                     class="outline-2 outline-gray-400 rounded-lg py-1.5 active:border-rose-300 px-2 {{ $employeeID != '' ? 'text-black' : 'text-gray-400' }}">
                     <option value="0" default selected hidden>Select name</option>
                     @foreach ($employees as $employee)
@@ -125,7 +125,8 @@
 
                     <div class="flex flex-col gap-1 flex-1">
                         <label for="reason" class="font-medium">
-                            Reason</label>
+                            Reason
+                        </label>
                         <input type="text" id="reason" name="reason" placeholder="Type reason" wire:model.blur="requests.{{ $index }}.reason"
                             class="outline-2 outline-gray-400 rounded-lg py-1 active:border-rose-300 px-2 {{ $request['reason'] != '' ? 'text-black' : 'text-gray-400' }}">
                     </div>
@@ -139,6 +140,18 @@
         
         <div>
             <button wire:click.prevent="add" class="text-center cursor-pointer bg-blue-400 text-white font-medium py-1.5 rounded-lg px-4">+ Add</button>
+        </div>
+
+        <div class="flex flex-col gap-1 flex-1">
+            <label for="password" class="font-medium">
+                Password
+                <span class="text-red-400">*</span>
+            </label>
+            <input type="password" id="password" name="password" placeholder="Type password" wire:model.blur="password"
+                class="outline-2 outline-gray-400 rounded-lg py-1 active:border-rose-300 px-2 {{ $password != '' ? 'text-black' : 'text-gray-400' }}">
+             @error("password")
+                <div class="text-red-400 text-sm">{{ $message }}</div>
+            @enderror
         </div>
 
         <button  class="cursor-pointer bg-green-600 text-white font-medium py-1.5 rounded-lg px-4 flex gap-3 justify-center">

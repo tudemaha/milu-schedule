@@ -8,6 +8,7 @@ use App\Models\MasterTeam;
 use App\Models\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 use function Symfony\Component\Clock\now;
@@ -26,6 +27,7 @@ class Form extends Component
     public $requests = [
         ['date' => '', 'type_id' => 0, 'reason' => ''],
     ];
+    public $password = "";
 
     protected function rules() {
         return [
@@ -35,6 +37,7 @@ class Form extends Component
             'requests.*.date' => "required|date",
             'requests.*.type_id' => 'required|integer|min:1|max:5',
             'requests.*.reason' => 'string',
+            'password' => 'required|min:6',
         ];
     }
 
@@ -46,7 +49,9 @@ class Form extends Component
             'requests.*.date.required' => 'Request date must be filled.',
             'requests.*.type_id.required' => 'Request type must be filled.',
             'requests.*.type_id.min' => 'Request type must in selection.',
-            'requests.*.type_id.max' => 'Request type must in selection.'
+            'requests.*.type_id.max' => 'Request type must in selection.',
+            'password.required' => 'Password must be filled.',
+            'password.min' => 'Password must be at least 6 characters.',
         ];
     }
 
@@ -66,6 +71,13 @@ class Form extends Component
     public function updatedTeamID($value) {
         $this->employees = Employee::where('team_id', $value)->get();
         $this->updateOffRequests($value);        
+    }
+
+    public function updatedEmployeeID($value) {
+        $employee = Employee::find($value);
+        if(!$employee->password) {
+            $this->redirect('/set-password?id='.$value);
+        }
     }
 
     public function add() {
@@ -91,6 +103,12 @@ class Form extends Component
 
     public function save() {
         $validated = $this->validate();
+
+        $employee = Employee::find($this->employeeID);
+        if(!Hash::check($validated['password'], $employee->password)) {
+            $this->addError("password", 'Invalid password.');
+            return;
+        }
 
         $end = Carbon::parse($this->nextWeekEndDate)->endOfDay();
         $offRequests = DB::table('requests')
